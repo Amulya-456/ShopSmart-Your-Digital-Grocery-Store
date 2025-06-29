@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Smart-Cart</title>
+  <link rel="stylesheet" href="../CSS/login.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Smart-Cart</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#">MyCart</a></li>
+      <li><a href="#">Orders</a></li>
+      <li><a href="#">History</a></li>
+      <li><a href="login.html">User Login</a>/<a href="adminlogin.html">Admin Login</a></li>
+    </ul>
+  </nav>
+
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Login</h2>
+      <form id="login-form">
+        <label>Email</label>
+        <input type="email" id="email" required placeholder="Enter email" />
+
+        <label>Password</label>
+        <input type="password" id="password" required placeholder="Enter password" />
+
+        <button type="submit">Login</button>
+      </form>
+
+      <p class="signup-text">
+        Don’t have an account? <a href="signup.html">Sign Up</a><br />
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("login-form");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      try {
+        const res = await fetch("http://localhost:5000/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.success) {
+          alert("✅ Login successful!");
+          window.location.href = "admindashboard.html";
+        } else {
+          alert(data.message || "Invalid credentials.");
+        }
+
+      } catch (err) {
+        alert("Something went wrong. Try again.");
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>
+
+

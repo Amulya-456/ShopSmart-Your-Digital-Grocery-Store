@@ -1,0 +1,41 @@
+body {
+  font-family: Arial;
+  background: #f9f9f9;
+  margin: 0;
+}
+
+.navbar {
+  background-color: #00a878;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+
+.container {
+  padding: 2rem;
+}
+
+.order-box {
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+.nav-links a.active {
+  font-weight: bold;
+  color: white;
+  border-bottom: 2px solid white;
+}

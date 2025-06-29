@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Product</title>
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+}
+
+nav {
+  background-color: #4caf50;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #d3f6a1;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: 
+    linear-gradient(rgba(118, 155, 23, 0.9), rgba(203, 211, 163, 0.9)),
+    url('https://as2.ftcdn.net/jpg/15/28/26/07/1000_F_1528260700_5upT0oGw6qtTctF8eaUAvfPnhWex4n9e.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+form input,
+form select,
+form textarea {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+textarea {
+  grid-column: span 3;
+  height: 100px;
+  resize: vertical;
+}
+
+.submit-btn {
+  grid-column: span 3;
+  background-color: #007937;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.nav-links a.active {
+  font-weight: bold;
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+</style>
+</head>
+<body>
+
+  <nav>
+    <div>Smart-Cart</div>
+    <div>
+      <nav class="navbar">
+    <ul class="nav-links">
+      <a href="admindashboard.html">Dashboard</a>
+      <a href="user.html">Users</a>
+      <a href="Admin_product.html">Products</a>
+      <a href="addproduct.html"class="active">Add Product</a>
+      <a href="admin_orders.html">Orders</a>
+      <a href="login.html">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Add Product</h2>
+    <form id="addProductForm">
+      <input id="productname" placeholder="Enter product name" />
+      <input id="rating" type="number" step="0.1" placeholder="Enter product rating" />
+      <input id="price" type="number" placeholder="Enter product price" />
+      <input id="image" placeholder="Enter image URL" />
+      <select id="category">
+        <option value="">Select Category</option>
+        <option value="Vegetables">Vegetables</option>
+        <option value="Fruits">Fruits</option>
+        <option value="Dairy">Dairy</option>
+        <option value="Meat">Meat</option>
+      </select>
+      <input id="count" type="number" placeholder="Enter count in stock" />
+      <textarea id="description" placeholder="Enter product description"></textarea>
+      <button type="submit" class="submit-btn">Add Product</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("addProductForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const product = {
+        productname: document.getElementById("productname").value,
+        rating: parseFloat(document.getElementById("rating").value),
+        price: parseFloat(document.getElementById("price").value),
+        image: document.getElementById("image").value,
+        category: document.getElementById("category").value,
+        countInStock: parseInt(document.getElementById("count").value),
+        description: document.getElementById("description").value,
+      };
+
+      for (const key in product) {
+        if (!product[key]) {
+          alert("❌ Please fill in all fields.");
+          return;
+        }
+      }
+
+      try {
+        const res = await fetch("http://localhost:5000/api/products", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(product)
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          alert("✅ Product added successfully!");
+          window.location.href = "./admindashboard.html";
+        } else {
+          alert("❌ Failed to add product: " + data.message);
+        }
+      } catch (err) {
+        alert("❌ Error: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

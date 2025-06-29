@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart-Cart Orders</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        linear-gradient(rgba(118, 155, 23, 0.9), rgba(203, 211, 163, 0.9)),
+        url('https://as2.ftcdn.net/jpg/15/28/26/07/1000_F_1528260700_5upT0oGw6qtTctF8eaUAvfPnhWex4n9e.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .navbar {
+      background: #34b855;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { color: #fff; font-size: 22px; font-weight: bold; }
+    .nav-links {
+      list-style: none; display: flex; gap: 20px; margin: 0; padding: 0;
+    }
+    .nav-links a {
+      color: #fff; text-decoration: none; font-weight: 500;
+    }
+    .nav-links a.active {
+      border-bottom: 2px solid #fff;
+    }
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .order-card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .order-card p {
+      margin: 5px 0;
+      line-height: 1.4;
+    }
+    .order-card .label {
+      font-weight: bold;
+    }
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 15px;
+    }
+    .status-dropdown {
+      padding: 6px 10px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">Smart-Cart</div>
+    <ul class="nav-links">
+      <li><a href="admindashboard.html">Dashboard</a></li>
+      <li><a href="user.html">Users</a></li>
+      <li><a href="Admin_product.html">Products</a></li>
+      <li><a href="addproduct.html">Add Product</a></li>
+      <li><a href="admin-orders.html" class="active">Orders</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h2>Orders</h2>
+    <div id="ordersContainer"></div>
+  </div>
+
+  <script>
+    async function loadOrders() {
+      try {
+        const res = await fetch('http://localhost:5000/api/orders');
+        const orders = await res.json();
+        const container = document.getElementById('ordersContainer');
+        container.innerHTML = ''; // Clear before render
+
+        orders.forEach(o => {
+          const card = document.createElement('div');
+          card.className = 'order-card';
+          card.innerHTML = `
+            <p><span class="label">Order ID:</span> ${o._id}</p>
+            <p><span class="label">Fullname:</span> ${o.fullname || 'N/A'}</p>
+            <p><span class="label">Phone:</span> ${o.phone || 'N/A'}</p>
+            <p><span class="label">Product ID:</span> ${o.productId || 'N/A'}</p>
+            <p><span class="label">Quantity:</span> ${o.quantity || 'N/A'}</p>
+            <p><span class="label">Total price:</span> ₹${o.totalPrice || 'N/A'}</p>
+            <p><span class="label">Payment Method:</span> ${o.paymentMethod || 'N/A'}</p>
+            <p><span class="label">Address:</span> ${o.address || 'N/A'}</p>
+            <p><span class="label">Created At:</span> ${o.createdAt ? new Date(o.createdAt).toLocaleString() : 'N/A'}</p>
+            <div class="status-row">
+              <p><strong>Status:</strong> <span id="status-text-${o._id}">${o.status}</span></p>
+              <select class="status-dropdown" data-id="${o._id}">
+                <option value="Pending" ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Shipped" ${o.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                <option value="Delivered" ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+              </select>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error('Failed to load orders', err);
+      }
+    }
+
+    // Update status
+    document.addEventListener('change', async (e) => {
+      if (e.target.classList.contains('status-dropdown')) {
+        const orderId = e.target.getAttribute('data-id');
+        const newStatus = e.target.value;
+
+        try {
+          const res = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+          });
+
+          if (res.ok) {
+            document.getElementById(`status-text-${orderId}`).textContent = newStatus;
+          } else {
+            alert('Failed to update status');
+          }
+        } catch (error) {
+          console.error('Error updating status:', error);
+        }
+      }
+    });
+
+    // Load on page load
+    loadOrders();
+  </script>
+</body>
+</html>

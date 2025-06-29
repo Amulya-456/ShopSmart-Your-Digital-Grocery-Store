@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Users - Smart-Cart</title>
+  <link rel="stylesheet" href="../CSS/user.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Smart-Cart</div>
+    <ul class="nav-links">
+      <li><a href="admindashboard.html">Dashboard</a></li>
+      <li><a href="user.html" class="active">Users</a></li>
+      <li><a href="Admin_product.html">Products</a></li>
+      <li><a href="addproduct.html">Add Product</a></li>
+      <li><a href="admin_orders.html">Orders</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Users Table -->
+  <div class="container">
+    <h2>Users</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Sl/No</th>
+          <th>User ID</th>
+          <th>User Name</th>
+          <th>Email</th>
+          <th>Operation</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody">
+        <!-- Populated by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <script src="../js/user.js"></script>
+</body>
+</html>
+</html>

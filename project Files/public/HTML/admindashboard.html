@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart-Cart</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: 
+        linear-gradient(rgba(118, 155, 23, 0.9), rgba(203, 211, 163, 0.9)),
+        url('https://as2.ftcdn.net/jpg/15/28/26/07/1000_F_1528260700_5upT0oGw6qtTctF8eaUAvfPnhWex4n9e.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background-color: #16a34a;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .nav-links li a.active,
+    .nav-links li a:hover {
+      text-decoration: underline;
+    }
+
+    .dashboard-title {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 32px;
+      color: #1e293b;
+    }
+
+    .dashboard-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 260px;
+      text-align: center;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .card p {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #1e3a8a;
+    }
+
+    .card button {
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #1d4ed8;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Smart-Cart</div>
+    <ul class="nav-links">
+      <li><a href="admindashboard.html" class="active">Dashboard</a></li>
+      <li><a href="user.html">Users</a></li>
+      <li><a href="Admin_product.html">Products</a></li>
+      <li><a href="addproduct.html">Add Product</a></li>
+      <li><a href="admin_orders.html">Orders</a></li>
+      <li><a href="login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <h1 class="dashboard-title">Dashboard</h1>
+
+  <div class="dashboard-cards">
+    <div class="card">
+      <h2>Product Count</h2>
+      <p id="productCount">Loading...</p>
+      <a href="Admin_product.html"><button>View Products</button></a>
+    </div>
+
+    <div class="card">
+      <h2>User Count</h2>
+      <p id="userCount">Loading...</p>
+      <a href="user.html"><button>View Users</button></a>
+    </div>
+
+    <div class="card">
+      <h2>Order Count</h2>
+      <p id="orderCount">Loading...</p>
+      <a href="orders.html"><button>View Orders</button></a>
+    </div>
+
+    <div class="card">
+      <h2>Add Product</h2>
+      <p style="margin-bottom: 20px;"></p>
+      <a href="addproduct.html"><button>Add</button></a>
+    </div>
+  </div>
+
+  <script>
+    // Manually set fixed count values
+    document.getElementById("productCount").innerText = 21;
+    document.getElementById("userCount").innerText = 1;
+    document.getElementById("orderCount").innerText = 8;
+  </script>
+</body>
+</html>

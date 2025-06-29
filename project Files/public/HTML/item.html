@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopSmart - Grocery Items</title>
+  <link rel="stylesheet" href="../CSS/items.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">Smart-Cart</div>
+    <ul class="nav-links">
+      <li><a href="./index.html">Home</a></li>
+      <li><a href="#" class="active">Items</a></li>
+      <li><a href="./cart.html">Cart</a></li>
+      <li><a href="./orders.html">Orders</a></li>
+      <li><a href="./history.html">History</a></li>
+      <li><a href="./login.html">Logout</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    Grocery Items
+    <div class="cart-container" onclick="window.location.href='./cart.html'">
+      🛒 <span id="cart-count">0</span>
+      <span class="cart-badge" id="cart-badge">0</span>
+    </div>
+  </header>
+
+  <!-- Search + Category Filter -->
+  <div class="search-filter-container">
+    <div class="search-group">
+      <label for="searchInput">Search By Product Name</label>
+      <input type="text" id="searchInput" placeholder="Search by product name" onkeyup="searchItems()" />
+    </div>
+    <div class="category-group">
+      <label for="categorySelect">Filter By Category</label>
+      <select id="categorySelect" onchange="categoryFilter()">
+        <option value="all">all</option>
+        <option value="Vegetables">Vegetables</option>
+        <option value="fruits">Fruits</option>
+        <option value="Dairy">Dairy</option>
+        <option value="Meat">Meat</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Category Buttons -->
+  <div class="category-container">
+    <button class="category" onclick="filterItems('Vegetables')">Vegetables</button>
+    <button class="category" onclick="filterItems('fruits')">Fruits</button>
+    <button class="category" onclick="filterItems('Dairy')">Dairy Items</button>
+    <button class="category" onclick="filterItems('Meat')">Meat</button>
+  </div>
+
+  <!-- Items Grid -->
+  <div id="items-container" class="items-container"></div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <!-- ✅ External JS Only -->
+  <script src="../js/items.js"></script>
+</body>
+</html>

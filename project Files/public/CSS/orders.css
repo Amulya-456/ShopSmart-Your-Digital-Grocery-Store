@@ -1,0 +1,136 @@
+/* ===== Global Page Styling ===== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(rgba(118, 155, 23, 0.9), rgba(203, 211, 163, 0.9)),
+              url('https://as2.ftcdn.net/jpg/15/28/26/07/1000_F_1528260700_5upT0oGw6qtTctF8eaUAvfPnhWex4n9e.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ===== Header ===== */
+.header {
+  background-color: #2ecc71;
+  padding: 15px 20px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {.orders-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order {
+  border: 1px solid #ccc;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.order-header p {
+  margin: 4px 0;
+}
+
+.order-items {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  gap: 10px;
+  background: #fff;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+}
+
+  margin: 0;
+}
+
+.nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav a.active {
+  text-decoration: underline;
+}
+
+/* ===== Title ===== */
+h2 {
+  text-align: center;
+  margin-top: 20px;
+  color: #2c3e50;
+}
+
+/* ===== Orders Container ===== */
+.orders-container {
+  max-width: 900px;
+  margin: 30px auto;
+  background-color: #ffffffdd;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ===== Order Card ===== */
+.order-card {
+  border: 1px solid #ccc;
+  border-left: 6px solid #2ecc71;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.order-card p {
+  margin: 8px 0;
+  color: #333;
+}
+
+.order-card ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.order-card ul li {
+  list-style: disc;
+  color: #555;
+}
+
+/* ===== Responsive Design ===== */
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav {
+    margin-top: 10px;
+  }
+
+  .orders-container {
+    padding: 15px;
+  }
+
+  .order-card {
+    padding: 15px;
+  }
+}
+
